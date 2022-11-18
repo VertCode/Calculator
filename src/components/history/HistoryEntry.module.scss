@@ -1,0 +1,43 @@
+.entry {
+  padding: 0.5rem;
+  cursor: pointer;
+
+  transition: all 0.5s ease-in-out;
+  word-break: break-all;
+
+  // Remove all button styles
+  display: block;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+
+  font-family: 'Outfit', sans-serif;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.wrapper {
+  // Make the border rounded
+  border-radius: 12px;
+  padding: 0.5rem;
+
+  // Gray ish Glassy background
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+
+  color: #000;
+
+  // Make sure the text is not selectable.
+  user-select: none;
+
+  > p {
+    margin: 0.25rem 0;
+  }
+
+  > h1 {
+    margin: 0.5rem 0;
+  }
+}

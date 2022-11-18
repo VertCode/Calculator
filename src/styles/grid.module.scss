@@ -1,0 +1,85 @@
+@use 'sass:math';
+
+// Amount of columns in the grid
+$columns: 24;
+
+// Map with all the breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px,
+);
+
+// Standard container classize.
+// Breakpoints from map are used.
+.container {
+  width: 100%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  @each $size, $screenWidth in $breakpoints {
+    @media screen and (min-width: $screenWidth) {
+      @if $size == 'xs' {
+        width: 100%;
+      } @else {
+        $div: math.round(math.div(($screenWidth * 0.95), 10));
+        width: $div * 10;
+      }
+    }
+  }
+}
+
+// Standard container-fluid
+.container-fluid {
+  width: 100%;
+}
+
+// Row styling
+// Standard flexbox styling.
+.row,
+[class^='col-'],
+[class*=' col-'],
+.col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+// Base column styling.
+[class^='col-'],
+[class*=' col-'],
+.col {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+// For-loop to generate the 12 column grid.
+@for $i from $columns through 1 {
+  // Width will be calculated as follows: 100% / (12 / i) where i is the iterator in the for-loop.
+  // Calc function is used, because it's more accurate.
+  $div: math.div($columns, $i);
+  $width: math.div(100%, $div);
+
+  // Base column class is generated.
+  %col-#{$i},
+  .col-#{$i} {
+    width: $width;
+  }
+
+  // For each loop with the sizes map.
+  // size is name for the screensize
+  // screen width is the width of the screen in pixels
+  // Loop should be reversed, because the smallest screen size should be the first one.
+  @each $size, $screenWidth in $breakpoints {
+    // Column class with screensize name and column number.
+    %col-#{$size}-#{$i},
+    .col-#{$size}-#{$i} {
+      @media screen and (min-width: $screenWidth) {
+        width: $width !important;
+      }
+    }
+  }
+}

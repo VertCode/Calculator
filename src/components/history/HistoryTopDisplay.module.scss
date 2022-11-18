@@ -1,0 +1,25 @@
+.content {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 0.5em;
+  color: #000;
+
+  h1 {
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  svg {
+    font-size: xx-large;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1) rotate(90deg);
+    }
+  }
+}
